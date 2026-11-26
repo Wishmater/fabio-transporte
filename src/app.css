@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: 'Montserrat';
+		src: url(/fonts/Montserrat-VariableFont_wght.ttf);
+		font-display: swap;
+	}
+}
+
+@layer components {
+	.text-shadow {
+		text-shadow: 0 0 3px white;
+	}
+}
+
+:root {
+	--pantone-color: #0F4366;
+	--secondary-color: #0F436619;
+	--warning-color: #EAB308FF;
+	--danger-color: #B91C1CFF;
+	--info-color: #3B82F6FF;
+}
+
+.table th,
+.table td {
+	@apply px-4 py-3;
+}
+
+.table th {
+	@apply text-base
+}
+
+.invalid {
+	border-bottom: 1px solid var(--danger-color) !important;
+	background: rgba(185, 28, 28, 0.05) !important;
+}
+
+.invalid:focus-within {
+	background: #0f43661a !important;
+	border-bottom: 1px solid #0f4366 !important;
+}
+
+.logo
+{
+	opacity: 0.2;
+}
