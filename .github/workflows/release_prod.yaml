@@ -1,0 +1,31 @@
+name: Deploy website PROD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v4
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install Netlify
+        run: npm install netlify-cli@17.10.1 -g
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: Deploy to Netlify
+        id: netlify_deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          netlify deploy --prod \
+            --dir build \
+            --site c7012f33-bdf7-4d77-be72-e667fd4960cc \
+            --auth "$NETLIFY_AUTH_TOKEN"
